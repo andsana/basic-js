@@ -12,10 +12,20 @@ const { NotImplementedError } = require('../extensions/index.js');
  * depthCalc.calculateDepth([[[]]]) => 3
  *
  */
+
 class DepthCalculator {
-  calculateDepth(/* arr */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  // метод calculateDepth принимает массив arr и возвращает его глубину
+  calculateDepth(arr) {
+    let depth = 1; // устанавливаем начальную глубину 1
+    for (let i = 0; i < arr.length; i++) { // проходим по каждому элементу массива
+      if (Array.isArray(arr[i])) { // если элемент является массивом
+        const currDepth = this.calculateDepth(arr[i]) + 1; // рекурсивно вызываем метод calculateDepth для этого элемента и увеличиваем его результат на 1
+        if (currDepth > depth) { // если текущая глубина больше, чем сохраненная глубина
+          depth = currDepth; // обновляем сохраненную глубину
+        }
+      }
+    }
+    return depth; // возвращаем сохраненную глубину
   }
 }
 

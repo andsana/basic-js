@@ -16,6 +16,37 @@ function getCommonCharacterCount(/* s1, s2 */) {
   // remove line with error and write your code here
 }
 
+function getCommonCharacterCount(s1, s2) {
+  let commonCount = 0;
+  const s1CharCounts = getCharCounts(s1);
+  const s2CharCounts = getCharCounts(s2);
+  
+  for (const char in s1CharCounts) {
+    if (char in s2CharCounts) {
+      commonCount += Math.min(s1CharCounts[char], s2CharCounts[char]);
+    }
+  }
+  
+  return commonCount;
+}
+
+function getCharCounts(str) {
+  const charCounts = {};
+  
+  for (const char of str) {
+    if (char in charCounts) {
+      charCounts[char]++;
+    } else {
+      charCounts[char] = 1;
+    }
+  }
+  
+  return charCounts;
+}
+
+
+
+
 module.exports = {
   getCommonCharacterCount
 };
